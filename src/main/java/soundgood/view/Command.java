@@ -8,6 +8,8 @@ public enum Command {
 
     TERMINATE,
 
+    LISTLEASE,
+
     QUIT,
 
     HELP,

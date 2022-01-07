@@ -157,16 +157,16 @@ insert into ensemble SELECT *,'15' as max_capacity, '2' as min_attendence ,'coun
 insert into ensemble SELECT *,'15' as max_capacity, '2' as min_attendence ,'choir' as genre from lesson where id=15;
 
 --instruments for rent
-insert into instrument_for_rent (instrument_type, brand, quantity_in_stock) VALUES ('piano', 'Propithecus verreauxi', 11);
-insert into instrument_for_rent (instrument_type, brand, quantity_in_stock) VALUES ('piano', 'Lemur fulvus', 17);
-insert into instrument_for_rent (instrument_type, brand, quantity_in_stock) VALUES ('guitar', 'Varanus komodensis', 16);
-insert into instrument_for_rent (instrument_type, brand, quantity_in_stock) VALUES ('guitar', 'Cacatua tenuirostris', 20);
-insert into instrument_for_rent (instrument_type, brand, quantity_in_stock) VALUES ('base guitar', 'Bassariscus astutus', 13);
-insert into instrument_for_rent (instrument_type, brand, quantity_in_stock) VALUES ('base guitar', 'Crotalus cerastes', 6);
-insert into instrument_for_rent (instrument_type, brand, quantity_in_stock) VALUES ('drums', 'Dacelo novaeguineae', 15);
-insert into instrument_for_rent (instrument_type, brand, quantity_in_stock) VALUES ('drums', 'Merops nubicus', 7);
-insert into instrument_for_rent (instrument_type, brand, quantity_in_stock) VALUES ('bagpipes', 'Anastomus oscitans', 7);
-insert into instrument_for_rent (instrument_type, brand, quantity_in_stock) VALUES ('banjo', 'Columba palumbus', 8);
+insert into instrument_for_rent (instrument_type, brand, quantity_in_stock, price) VALUES ('piano', 'Propithecus verreauxi', 11,200);
+insert into instrument_for_rent (instrument_type, brand, quantity_in_stock, price) VALUES ('piano', 'Lemur fulvus', 17,300);
+insert into instrument_for_rent (instrument_type, brand, quantity_in_stock, price) VALUES ('guitar', 'Varanus komodensis', 16,250);
+insert into instrument_for_rent (instrument_type, brand, quantity_in_stock, price) VALUES ('guitar', 'Cacatua tenuirostris', 20,300);
+insert into instrument_for_rent (instrument_type, brand, quantity_in_stock, price) VALUES ('base guitar', 'Bassariscus astutus', 13,500);
+insert into instrument_for_rent (instrument_type, brand, quantity_in_stock, price) VALUES ('base guitar', 'Crotalus cerastes', 6,700);
+insert into instrument_for_rent (instrument_type, brand, quantity_in_stock, price) VALUES ('drums', 'Dacelo novaeguineae', 15,2000);
+insert into instrument_for_rent (instrument_type, brand, quantity_in_stock, price) VALUES ('drums', 'Merops nubicus', 7,3500);
+insert into instrument_for_rent (instrument_type, brand, quantity_in_stock, price) VALUES ('bagpipes', 'Anastomus oscitans', 7,9000);
+insert into instrument_for_rent (instrument_type, brand, quantity_in_stock, price) VALUES ('banjo', 'Columba palumbus', 8,18000);
 
 --insert lease
 insert into lease (start_date, end_date, instrument_id, student_id) VALUES ('2022-01-08','2023-01-08',1,1);

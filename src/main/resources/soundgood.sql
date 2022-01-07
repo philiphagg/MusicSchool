@@ -12,7 +12,8 @@ CREATE TABLE instrument_for_rent (
  id INT GENERATED ALWAYS AS IDENTITY,
  instrument_type VARCHAR(500) NOT NULL,
  brand VARCHAR(500),
- quantity_in_stock INT NOT NULL
+ quantity_in_stock INT NOT NULL,
+ price INT NOT NULL
 );
 
 ALTER TABLE instrument_for_rent ADD CONSTRAINT PK_instrument_for_rent PRIMARY KEY (id);
