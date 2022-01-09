@@ -204,7 +204,7 @@ public class SoundGoodDAO {
         checkQuantityInStockOfInstrumentStmt = connection.prepareStatement("SELECT quantity_in_stock FROM " + TABLE_INSTRUMENTS_FOR_RENT + " WHERE id = ?");
         addLeaseStmt = connection.prepareStatement("INSERT INTO " + TABLE_FOR_LEASE + " (" + START_DATE + ", " + END_DATE + ", " + INSTRUMENT_ID + ", " + STUDENT_ID + ") VALUES (?,?,?,?)");
         updateQuantityInStockStmt = connection.prepareStatement("UPDATE " + INSTRUMENT_FOR_RENT + " SET " + QUANTITY_IN_STOCK + " = ? where id = ?");
-        findAllLeasesStmt = connection.prepareStatement("SELECT * FROM "+TABLE_FOR_LEASE);
+        findAllLeasesStmt = connection.prepareStatement("SELECT * FROM "+TABLE_FOR_LEASE+ " WHERE "+END_DATE+" IS NOT NULL");
         findLeaseOnIDStmt = connection.prepareStatement("SELECT * FROM "+TABLE_FOR_LEASE+" JOIN "+TABLE_INSTRUMENTS_FOR_RENT+ " ifr ON lease."+INSTRUMENT_ID+" = ifr." +ID+" WHERE lease."+ID+ " = ?");
         findSpecificLeasesStmt = connection.prepareStatement("SELECT * FROM "+TABLE_FOR_LEASE+" WHERE ID = ?");
         terminateLease = connection.prepareStatement("UPDATE " +TABLE_FOR_LEASE+ " SET " +END_DATE+ " = null where id = ?");
