@@ -174,11 +174,16 @@ public class SoundGoodDAO {
         }
     }
 
-    public void updateInstrumentQty(Instrument instr) throws SQLException {
-        updateQuantityInStockStmt.setInt(1, instr.getQty());
-        updateQuantityInStockStmt.setInt(2, instr.getInstrumentID());
-        updateQuantityInStockStmt.executeUpdate();
-        connection.commit();
+    public void updateInstrumentQty(Instrument instr) throws SQLException, SgDBException {
+        String failMsg = "failed to update instrument" + instr.getInstrumentID();
+        try {
+            updateQuantityInStockStmt.setInt(1, instr.getQty());
+            updateQuantityInStockStmt.setInt(2, instr.getInstrumentID());
+            updateQuantityInStockStmt.executeUpdate();
+            connection.commit();
+        }catch (SQLException sqle){
+            handleException(failMsg,sqle);
+        }
     }
 
     public void terminateLease(Lease lease) throws SQLException, SgDBException {

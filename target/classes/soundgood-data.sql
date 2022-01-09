@@ -170,7 +170,7 @@ insert into instrument_for_rent (instrument_type, brand, quantity_in_stock, pric
 
 --insert lease
 insert into lease (start_date, end_date, instrument_id, student_id) VALUES ('2022-01-08','2023-01-08',1,1);
-insert into lease (start_date, end_date, instrument_id, student_id) VALUES ('2022-01-08','2023-01-08',2,2);
+insert into lease (start_date, end_date, instrument_id, student_id) VALUES ('2022-01-08','2023-01-08',2,1);
 insert into lease (start_date, end_date, instrument_id, student_id) VALUES ('2022-01-08','2023-01-08',3,3);
 insert into lease (start_date, end_date, instrument_id, student_id) VALUES ('2022-01-08','2023-01-08',4,4);
 insert into lease (start_date, end_date, instrument_id, student_id) VALUES ('2022-01-08','2023-01-08',5,5);
