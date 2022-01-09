@@ -18,9 +18,9 @@ public class Controller {
         sgDAO = new SoundGoodDAO();
     }
 
-    public List<Instrument> listInstruments() throws InstrumentException {
+    public List<Instrument> listInstruments(String instrType) throws InstrumentException {
         try{
-            return sgDAO.listInstruments();
+            return sgDAO.listInstruments(instrType);
         }catch (Exception e) {
             throw new InstrumentException("Unable to list instruments", e);
         }
@@ -36,12 +36,23 @@ public class Controller {
 
     }
 
-    public List<Lease> terminate() throws LeaseException {
+    public List<Lease> listLease() throws LeaseException {
         try{
             return sgDAO.listLease();
         } catch (SgDBException | SQLException e) {
-            throw new LeaseException("Unable to list instruments", e);
+            throw new LeaseException("Unable to list leases", e);
         }
+
+    }
+
+    public void terminate(int leaseID) throws SgDBException, SQLException {
+        Lease lease = new Lease(leaseID);
+        Instrument instr = sgDAO.gatherInformationBeforeTermination(lease);
+        sgDAO.updateInstrumentQty(instr.updateQty(instr));
+        sgDAO.terminateLease(lease);
+
+
+
 
     }
 }

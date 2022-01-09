@@ -46,7 +46,7 @@ public class BlockingInterpreter {
                         break;
                     case LIST:
 
-                        List<Instrument> instruments = ctrl.listInstruments();
+                        List<Instrument> instruments = ctrl.listInstruments(cmdLine.getParameter(0));
                         for(Instrument instrument : instruments){
                             System.out.println(
                                             "id: " +instrument.getInstrumentID()+ ", "+
@@ -64,7 +64,7 @@ public class BlockingInterpreter {
                         break;
 
                     case TERMINATE:
-                        List<Lease> leaseList = ctrl.terminate();
+                        List<Lease> leaseList = ctrl.listLease();
                         for(Lease lease : leaseList){
                             System.out.println(
                                     "id: " +lease.getId()+","+
@@ -77,8 +77,10 @@ public class BlockingInterpreter {
                         System.out.println("which lease would you like to terminate?");
 
                         Scanner sc = new Scanner(System.in);
-                        int test = sc.nextInt();
-                        System.out.println(test);
+                        int leaseID = sc.nextInt();
+                        ctrl.terminate(leaseID);
+
+                        System.out.println(leaseID+ " was terminated");
 
                         break;
 

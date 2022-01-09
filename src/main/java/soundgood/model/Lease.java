@@ -9,8 +9,8 @@ public class Lease {
     int instrumentID;
     int student_id;
 
-    public Lease(int student_id) {
-        this.student_id = student_id;
+    public Lease(int leaseID) {
+        this.id = leaseID;
     }
 
     public Lease(int id, Timestamp startDate, Timestamp endDate, int instrumentID, int student_id) {
@@ -22,7 +22,7 @@ public class Lease {
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(int id) {

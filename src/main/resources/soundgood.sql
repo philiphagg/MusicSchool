@@ -88,7 +88,7 @@ drop table if exists lease cascade;
 CREATE TABLE lease (
  id INT GENERATED ALWAYS AS IDENTITY,
  start_date TIMESTAMP(6) NOT NULL,
- end_date TIMESTAMP(6) NOT NULL,
+ end_date TIMESTAMP(6),
  instrument_id INT NOT NULL,
  student_id INT
 );

@@ -22,6 +22,10 @@ public class Instrument {
         this.brand = brand;
         this.qty = qtyInStock;
     }
+    public Instrument(int qty, int instrumentID, String type){
+        this.qty = qty;
+        this.instrumentID = instrumentID;
+    }
 
 
 
@@ -30,6 +34,10 @@ public class Instrument {
         this.brand = brand;
         this.qty = qty;
         this.instrumentID = instrumentID;
+    }
+
+    public Instrument(int qtyInStock) {
+        this.qty = qtyInStock;
     }
 
     public Instrument rent(Instrument instr){
@@ -99,5 +107,10 @@ public class Instrument {
 
     public void setNumberOfInstrumentsRented(int numberOfInstrumentsRented) {
         this.numberOfInstrumentsRented = numberOfInstrumentsRented;
+    }
+
+    public Instrument updateQty(Instrument instr) {
+        instr.setQty(this.qty + 1);
+        return instr;
     }
 }
