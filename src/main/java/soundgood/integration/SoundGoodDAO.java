@@ -48,7 +48,7 @@ public class SoundGoodDAO {
         try {
             connection.commit();
         } catch (SQLException e) {
-            handleException("Failed to commit", e);
+            throwExceptionAndRollback("Failed to commit", e);
         }
     }
 
@@ -59,7 +59,7 @@ public class SoundGoodDAO {
         connection.setAutoCommit(false);
     }
 
-    private void handleException(String failureMsg, Exception cause) throws SgDBException {
+    private void throwExceptionAndRollback(String failureMsg, Exception cause) throws SgDBException {
         String completeFailureMsg = failureMsg;
         try {
             connection.rollback();
@@ -90,7 +90,7 @@ public class SoundGoodDAO {
             }
             connection.commit();
         }catch (SQLException sqle) {
-            handleException(failureMsg, sqle);
+            throwExceptionAndRollback(failureMsg, sqle);
         }
 
         return instruments;
@@ -111,7 +111,7 @@ public class SoundGoodDAO {
             }
             return leaseList;
         } catch (SQLException throwables) {
-            handleException(failureMsg,throwables);
+            throwExceptionAndRollback(failureMsg,throwables);
         }
         return null;
     }
@@ -131,7 +131,7 @@ public class SoundGoodDAO {
             if(qtyInStock.next()) {instrument.setQty(qtyInStock.getInt(QUANTITY_IN_STOCK));}
             return instrument;
         } catch (SQLException sqle){
-            handleException(failureMsg, sqle);
+            throwExceptionAndRollback(failureMsg, sqle);
         }
         return null;
     }
@@ -153,7 +153,7 @@ public class SoundGoodDAO {
 
 
         }catch (SQLException sqle){
-            handleException(failureMsg,sqle);
+            throwExceptionAndRollback(failureMsg,sqle);
         }
         return null;
     }
@@ -169,7 +169,7 @@ public class SoundGoodDAO {
             addLeaseStmt.executeUpdate();
 
         }catch (SQLException  sqle){
-            handleException(failureMsg, sqle);
+            throwExceptionAndRollback(failureMsg, sqle);
         }
     }
 
@@ -180,7 +180,7 @@ public class SoundGoodDAO {
             updateQuantityInStockStmt.setInt(2, instr.getInstrumentID());
             updateQuantityInStockStmt.executeUpdate();
         }catch (SQLException sqle){
-            handleException(failMsg,sqle);
+            throwExceptionAndRollback(failMsg,sqle);
         }
     }
 
@@ -192,7 +192,7 @@ public class SoundGoodDAO {
             connection.commit();
 
         }catch (SQLException sqle){
-            handleException(failureMsg, sqle);
+            throwExceptionAndRollback(failureMsg, sqle);
         }
     }
 

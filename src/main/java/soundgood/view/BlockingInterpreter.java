@@ -61,6 +61,7 @@ public class BlockingInterpreter {
                                 Integer.parseInt(cmdLine.getParameter(0)),
                                 Integer.parseInt(cmdLine.getParameter(1))
                         );
+                        System.out.println("the instrument was successfully rented");
                         break;
 
                     case TERMINATE:
