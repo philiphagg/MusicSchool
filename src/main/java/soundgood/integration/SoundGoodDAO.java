@@ -69,9 +69,9 @@ public class SoundGoodDAO {
         }
 
         if (cause != null) {
-            throw new SgDBException(failureMsg, cause);
+            throw new SgDBException(completeFailureMsg, cause);
         } else {
-            throw new SgDBException(failureMsg);
+            throw new SgDBException(completeFailureMsg);
         }
     }
     public List<Instrument> listInstruments(String instrType) throws SgDBException {
