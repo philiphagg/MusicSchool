@@ -32,7 +32,8 @@ public class Controller {
         Instrument noOfInstruments = sgDAO.gatherInformationBeforeInstrumentRental(instr);
         instr = instr.rent(noOfInstruments);
         sgDAO.rent(instr);
-
+        sgDAO.updateInstrumentQty(instr);
+        sgDAO.commit();
     }
 
     public List<Lease> listLease() throws LeaseException {
@@ -45,12 +46,16 @@ public class Controller {
     }
 
     public void terminate(int leaseID) throws SgDBException, SQLException {
+        String failureMsg = "Wasn't able to terminate " +leaseID;
         Lease lease = new Lease(leaseID);
         Instrument instr = sgDAO.gatherInformationBeforeTermination(lease);
         sgDAO.updateInstrumentQty(instr.updateQty(instr));
         sgDAO.terminateLease(lease);
-
-
+        try {
+            sgDAO.commit();
+        } catch (SgDBException sge){
+            throw new SgDBException(failureMsg, sge);
+        }
 
 
     }

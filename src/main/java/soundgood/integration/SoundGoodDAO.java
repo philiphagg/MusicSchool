@@ -52,6 +52,7 @@ public class SoundGoodDAO {
         }
     }
 
+
     private void connectToSoundGoodDB() throws ClassNotFoundException, SQLException{
         connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/soundgoodmusic",
                 "postgres", "hej123");
@@ -166,27 +167,24 @@ public class SoundGoodDAO {
             addLeaseStmt.setInt(3, instr.getInstrumentID());
             addLeaseStmt.setInt(4, instr.getStudent_id());
             addLeaseStmt.executeUpdate();
-            connection.commit();
-            updateInstrumentQty(instr);
 
         }catch (SQLException  sqle){
             handleException(failureMsg, sqle);
         }
     }
 
-    public void updateInstrumentQty(Instrument instr) throws SQLException, SgDBException {
-        String failMsg = "failed to update instrument" + instr.getInstrumentID();
+    public void updateInstrumentQty(Instrument instr) throws  SgDBException {
+        String failMsg = "failed to update instrument " + instr.getInstrumentID();
         try {
             updateQuantityInStockStmt.setInt(1, instr.getQty());
             updateQuantityInStockStmt.setInt(2, instr.getInstrumentID());
             updateQuantityInStockStmt.executeUpdate();
-            connection.commit();
         }catch (SQLException sqle){
             handleException(failMsg,sqle);
         }
     }
 
-    public void terminateLease(Lease lease) throws SQLException, SgDBException {
+    public void terminateLease(Lease lease) throws  SgDBException {
         String failureMsg = "could not execute termination: " + lease.getId();
         try{
             terminateLease.setInt(1,lease.getId());
@@ -201,11 +199,11 @@ public class SoundGoodDAO {
     private void prepareStatements() throws SQLException{
         findAllInstrumentsStmt = connection.prepareStatement("SELECT * FROM " + INSTRUMENT_FOR_RENT + " WHERE " + QUANTITY_IN_STOCK + " > 0 and "+ INSTRUMENT_TYPE +"= ?");
         checkStudentEligableForRent = connection.prepareStatement("SELECT COUNT(*) FROM " + TABLE_FOR_LEASE + " WHERE " + TABLE_STUDENT_ID + " = ?");
-        checkQuantityInStockOfInstrumentStmt = connection.prepareStatement("SELECT quantity_in_stock FROM " + TABLE_INSTRUMENTS_FOR_RENT + " WHERE id = ?");
+        checkQuantityInStockOfInstrumentStmt = connection.prepareStatement("SELECT quantity_in_stock FROM " + TABLE_INSTRUMENTS_FOR_RENT + " WHERE id = ? FOR UPDATE");
         addLeaseStmt = connection.prepareStatement("INSERT INTO " + TABLE_FOR_LEASE + " (" + START_DATE + ", " + END_DATE + ", " + INSTRUMENT_ID + ", " + STUDENT_ID + ") VALUES (?,?,?,?)");
-        updateQuantityInStockStmt = connection.prepareStatement("UPDATE " + INSTRUMENT_FOR_RENT + " SET " + QUANTITY_IN_STOCK + " = ? where id = ?");
+        updateQuantityInStockStmt = connection.prepareStatement("UPDATE " + INSTRUMENT_FOR_RENT + " SET " + QUANTITY_IN_STOCK + " = ? where id = ? ");
         findAllLeasesStmt = connection.prepareStatement("SELECT * FROM "+TABLE_FOR_LEASE+ " WHERE "+END_DATE+" IS NOT NULL");
-        findLeaseOnIDStmt = connection.prepareStatement("SELECT * FROM "+TABLE_FOR_LEASE+" JOIN "+TABLE_INSTRUMENTS_FOR_RENT+ " ifr ON lease."+INSTRUMENT_ID+" = ifr." +ID+" WHERE lease."+ID+ " = ?");
+        findLeaseOnIDStmt = connection.prepareStatement("SELECT * FROM "+TABLE_FOR_LEASE+" JOIN "+TABLE_INSTRUMENTS_FOR_RENT+ " ifr ON lease."+INSTRUMENT_ID+" = ifr." +ID+" WHERE lease."+ID+ " = ? FOR UPDATE");
         findSpecificLeasesStmt = connection.prepareStatement("SELECT * FROM "+TABLE_FOR_LEASE+" WHERE ID = ?");
         terminateLease = connection.prepareStatement("UPDATE " +TABLE_FOR_LEASE+ " SET " +END_DATE+ " = null where id = ?");
     }

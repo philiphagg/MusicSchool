@@ -7,7 +7,6 @@ soundgood\view\CmdLine.class
 soundgood\model\LeaseException.class
 soundgood\model\InstrumentException.class
 soundgood\model\Instrument.class
-soundgood\model\InstrumentDTO.class
 soundgood\startup\Main.class
 soundgood\view\Command.class
 soundgood\integration\SgDBException.class
