@@ -33,7 +33,6 @@ public class Controller {
         instr = instr.rent(noOfInstruments);
         sgDAO.rent(instr);
 
-
     }
 
     public List<Lease> listLease() throws LeaseException {

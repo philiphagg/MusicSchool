@@ -110,7 +110,7 @@ public class SoundGoodDAO {
             }
             return leaseList;
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            handleException(failureMsg,throwables);
         }
         return null;
     }
@@ -128,12 +128,12 @@ public class SoundGoodDAO {
 
             if(noInstr.next()) {instrument.setNumberOfInstrumentsRented(noInstr.getInt("count"));}
             if(qtyInStock.next()) {instrument.setQty(qtyInStock.getInt(QUANTITY_IN_STOCK));}
-                return instrument;
+            return instrument;
         } catch (SQLException sqle){
             handleException(failureMsg, sqle);
         }
-            return null;
-        }
+        return null;
+    }
 
     public Instrument gatherInformationBeforeTermination(Lease lease) throws SgDBException {
         String failureMsg = "something went wrong with: " +lease.getId() ;
