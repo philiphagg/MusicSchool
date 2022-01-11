@@ -198,7 +198,7 @@ public class SoundGoodDAO {
 
     private void prepareStatements() throws SQLException{
         findAllInstrumentsStmt = connection.prepareStatement("SELECT * FROM " + INSTRUMENT_FOR_RENT + " WHERE " + QUANTITY_IN_STOCK + " > 0 and "+ INSTRUMENT_TYPE +"= ?");
-        checkStudentEligableForRent = connection.prepareStatement("SELECT COUNT(*) FROM " + TABLE_FOR_LEASE + " WHERE " + TABLE_STUDENT_ID + " = ?");
+        checkStudentEligableForRent = connection.prepareStatement("SELECT COUNT(*) FROM " + TABLE_FOR_LEASE + " WHERE " + TABLE_STUDENT_ID + " = ? AND "+END_DATE+" IS NOT NULL");
         checkQuantityInStockOfInstrumentStmt = connection.prepareStatement("SELECT quantity_in_stock FROM " + TABLE_INSTRUMENTS_FOR_RENT + " WHERE id = ? FOR UPDATE");
         addLeaseStmt = connection.prepareStatement("INSERT INTO " + TABLE_FOR_LEASE + " (" + START_DATE + ", " + END_DATE + ", " + INSTRUMENT_ID + ", " + STUDENT_ID + ") VALUES (?,?,?,?)");
         updateQuantityInStockStmt = connection.prepareStatement("UPDATE " + INSTRUMENT_FOR_RENT + " SET " + QUANTITY_IN_STOCK + " = ? where id = ? ");
