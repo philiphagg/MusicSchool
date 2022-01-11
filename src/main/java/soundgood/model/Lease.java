@@ -2,6 +2,10 @@ package soundgood.model;
 
 import java.sql.Timestamp;
 
+/**
+ * This class is responsible for Lease object and logic around it.
+ * also works as a transfer object between layers.
+ */
 public class Lease {
     int id;
     Timestamp startDate;

@@ -1,5 +1,9 @@
 package soundgood.view;
 
+/**
+ * This class was copied from the instructions
+ */
+
 public class CmdLine {
     private static final String PARAM_DELIMETER = " ";
     private String[] params;

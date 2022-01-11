@@ -11,6 +11,11 @@ import soundgood.model.LeaseException;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * This class was copied from the instructions
+ *
+ * responsible for interpreting the input from the user
+ */
 public class BlockingInterpreter {
     private static final String PROMPT = ">> ";
     private final Scanner console = new Scanner(System.in);
@@ -22,10 +27,10 @@ public class BlockingInterpreter {
     }
 
 
-
-    public void stop() {
-        keepReceivingCmds = false;
-    }
+    /**
+     * keeps user in a loop where the user can execute commands
+     * to interact with the application.
+     */
 
     public void handleCmds() {
         keepReceivingCmds = true;

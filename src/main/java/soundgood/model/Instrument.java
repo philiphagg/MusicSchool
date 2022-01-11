@@ -1,5 +1,10 @@
 package soundgood.model;
 
+
+/**
+ * represents a instrument. this class will also
+ * transfer data between layers
+ */
 public class Instrument {
     public String type;
     public String brand;
@@ -8,10 +13,7 @@ public class Instrument {
     public int instrumentID;
     public int numberOfInstrumentsRented;
 
-    public Instrument() {
-        this.type = null;
-        this.brand = null;
-    }
+
     public Instrument(int instrumentID, int student_id){
         this.instrumentID = instrumentID;
         this.student_id = student_id;
@@ -27,8 +29,6 @@ public class Instrument {
         this.instrumentID = instrumentID;
     }
 
-
-
     public Instrument(int instrumentID, String type, String brand, int qty) {
         this.type = type;
         this.brand = brand;
@@ -40,7 +40,13 @@ public class Instrument {
         this.qty = qtyInStock;
     }
 
-    public Instrument rent(Instrument instr){
+    /**
+     * method changes quantity for the rent, if it's possible
+     *
+     * @param instr instrument that shall change quantity
+     * @return  the instrument or null
+     */
+    public Instrument correctQtyAndCheckEligability(Instrument instr){
         if(rentalIsPossible(instr)){
             instr.setQty(instr.getQty() - 1);
             return instr;
@@ -51,6 +57,7 @@ public class Instrument {
         return null;
 
     }
+
 
     private void informUserReasons(Instrument instr) {
         if(instr.getQty() == 0)
@@ -63,7 +70,9 @@ public class Instrument {
         return noOfInstruments.getQty() > 0 && noOfInstruments.getNumberOfInstrumentsRented() < 2;
     }
 
-    public int getStudent_id(){return student_id;}
+    public int getStudent_id(){
+        return student_id;
+    }
 
     public String getType() {
         return type;
@@ -109,6 +118,12 @@ public class Instrument {
         this.numberOfInstrumentsRented = numberOfInstrumentsRented;
     }
 
+    /**
+     * updates the quantity of the instrument
+     *
+     * @param instr instrument that should be updated
+     * @return the instrument
+     */
     public Instrument updateQty(Instrument instr) {
         instr.setQty(this.qty + 1);
         return instr;

@@ -1,5 +1,8 @@
 package soundgood.view;
 
+/**
+ * available commands that can be used as input
+ */
 public enum Command {
 
     LIST,
@@ -8,14 +11,10 @@ public enum Command {
 
     TERMINATE,
 
-    LISTLEASE,
-
     QUIT,
 
     HELP,
 
     ILLEGAL_COMMAND
-
-
 
 }

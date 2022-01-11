@@ -1,5 +1,9 @@
 package soundgood.integration;
 
+/**
+ * exception that throws upon errors with
+ * database communication
+ */
 public class SgDBException extends Exception {
 
     public SgDBException(String reason) {
